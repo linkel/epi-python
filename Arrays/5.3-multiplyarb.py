@@ -5,6 +5,7 @@
 
 A = [1,2,0]
 B = [1,2,9]
+C = [0, 0]
 
 def multArb(A, B):
     # set the sign according to the first digit's sign
@@ -23,7 +24,7 @@ def multArb(A, B):
             print(res)
             res[i + j + 1] %= 10
             print(res)
-    
+    # removes the leading zeroes or returns 0 if there's nothing to go through
     res = res[next((i for i, x in enumerate(res) if x != 0), len(res)):] or [0]
     return [sign * res[0]] + res[1:]
 
