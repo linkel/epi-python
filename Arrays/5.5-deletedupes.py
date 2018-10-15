@@ -171,7 +171,3 @@ def appeartwotimes(A, m):
             for i in range(m - 2):
                 A.remove(it)
     return index
-
-print(appeartwotimes(G, m))
-print(G)
-
