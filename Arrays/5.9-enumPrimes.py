@@ -17,7 +17,7 @@ def primebrute(x):
         else:
             checker = True
     return primeList
-
+    
 print(primebrute(A))
 
 # The above brute force solution is O(n^3/2) time complexity.
