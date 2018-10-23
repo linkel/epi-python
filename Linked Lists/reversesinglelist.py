@@ -52,20 +52,24 @@ def reverse_sublist(L, start, finish):
 # Write a function that reverses a singly linked list.
 # Use no more than constant storage beyond that needed for the list itself.
 
-# Still don't completely get it. Need to revisit.
+# Had to look up info to write this.
 
 def reverseList(L):
     #dummy_head = ListNode(0, L)
     prev = None
     current = L
     nex = L.next
+    # as long as there is a node at the pointer current, keep going
     while (current is not None):
         current.next = prev
         prev = current
         current = nex
+        # if nex exists then go to the next (otherwise nonetype has no next)
         if nex:
             nex = nex.next
+    # set the new head of the linked list
     L = prev
+    # dummy head at the end so that it points to the new start of the list
     dummy_head = ListNode(0, L)
     return dummy_head.next
 
@@ -83,9 +87,49 @@ c = ListNode(3)
 d = ListNode(4)
 e = ListNode(5)
 f = ListNode(6)
+g = ListNode(7)
 insert_after(a, b)
 insert_after(b, c)
 insert_after(c, d) 
 insert_after(d, e) 
 insert_after(e, f) 
-printNode(reverseList(a))
+insert_after(f,g)
+#printNode(reverseList(a))
+
+# Write a program which takes as input a singly linked list L
+# and a nonnegative integer k and reverses the list k nodes at a time
+# if the nodes in the list is not a multiple of k
+# leave the last n mod k nodes unchanged. Do not change any data.
+
+def reversemod(L, k):
+    '''L: singly linked list
+    k: nonnegative integer'''
+    checker = current = L
+    prev = None
+    nex = L.next
+    itsOver = False
+    while current is not None:
+        incrementToForward = 0
+        for _ in range(k):
+            if checker is not None:
+                checker = checker.next
+                incrementToForward += 1
+            else:
+                itsOver = True
+        if itsOver == False:
+            for _ in range(incrementToForward):
+                current.next = prev
+                prev = current
+                current = nex
+                if nex:
+                    nex = nex.next
+        elif itsOver == True:
+            break
+    L = prev
+    dummy_head = ListNode(0, L)
+    return dummy_head.next
+
+printNode(a)
+printNode(reversemod(a, 2))
+        
+# oh fuck man I have it all wrong, need to sit more and think
