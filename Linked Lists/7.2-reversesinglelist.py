@@ -101,6 +101,9 @@ insert_after(f,g)
 # if the nodes in the list is not a multiple of k
 # leave the last n mod k nodes unchanged. Do not change any data.
 
+# attempt: unfortunately it is nonfunctional and also does not swap by k nodes,
+# the way the problem is worded. It tries to swap
+# but will end up changing 2 in overlap
 def reversemod(L, k):
     '''L: singly linked list
     k: nonnegative integer'''
@@ -110,7 +113,7 @@ def reversemod(L, k):
     itsOver = False
     while current is not None:
         incrementToForward = 0
-        for _ in range(k):
+        for _ in range(k-1):
             if checker is not None:
                 checker = checker.next
                 incrementToForward += 1
@@ -118,7 +121,7 @@ def reversemod(L, k):
                 itsOver = True
         if itsOver == False:
             for _ in range(incrementToForward):
-                current.next = prev
+                current.next = checker.next # need to check for the next that it exists tho
                 prev = current
                 current = nex
                 if nex:
@@ -131,5 +134,24 @@ def reversemod(L, k):
 
 printNode(a)
 printNode(reversemod(a, 2))
-        
-# oh fuck man I have it all wrong, need to sit more and think
+
+# solution found with help from internet
+# still need to go over this, I don't understand how the
+# reversing occurs at the cur.next, cur, pre = pre, cur.next, cur part.
+    
+def reverseGroup(self, head, k):
+    dummy = jump = ListNode(0)
+    dummy.next = l = r = head
+    
+    while True:
+        count = 0
+        while r and count < k:   # use r to locate the range
+            r = r.next
+            count += 1 # r will keep going til count becomes k
+        if count == k:  # if size k satisfied, reverse the inner linked list
+            pre, cur = r, l
+            for _ in range(k):
+                cur.next, cur, pre = pre, cur.next, cur  # standard reversing
+            jump.next, jump, l = pre, l, r  # connect two k-groups
+        else:
+            return dummy.next

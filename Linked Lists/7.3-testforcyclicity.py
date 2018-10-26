@@ -18,6 +18,9 @@ def insert_after(node, new_node):
     new_node.next = node.next
     node.next = new_node
 
+def make_cycle_for_last(node, new_node):
+    node.next = new_node
+
 def delete_after(node):
     node.next = node.next.next
 
@@ -27,6 +30,7 @@ def printNode(node):
     while temp.next:
         temp = temp.next
         print(temp.data)
+
 
 
 a = ListNode(1)
@@ -42,9 +46,12 @@ insert_after(c, d)
 insert_after(d, e) 
 insert_after(e, f) 
 insert_after(f, g)
+make_cycle_for_last(g, e)
+# linked list with a loop at e f g
 
-
-# attempt
+# initial attempt: what it actually does is just return the node where the pointers
+# ended up meeting. 
+ 
 def testCycle(L):
     slower = faster = L
     while faster is not None:
@@ -55,11 +62,11 @@ def testCycle(L):
                 return None
         slower = slower.next
         if faster == slower:
-            return L
+            return faster
     return None
 
 #printNode(a)
-#print(testCycle(a))
+print(testCycle(a).data)
 
 # Book says a brute-force approach with O(1) storage and no
 # list modification can traverse the list in two loops.
@@ -85,14 +92,19 @@ def has_cycle(head):
             if start is end:
                 return step
     fast = slow = head
+    # while the next two nodes exist
     while fast and fast.next and fast.next.next:
+        # one iterates by one, the other by two
         slow, fast = slow.next, fast.next.next
+        # when they're the same it's time for the next two iterators to find the cycle start
         if slow is fast:
             # Find start of cycle.
             cycle_len_advanced_iter = head
+            # cycle len just counts the number of nodes before it repeats
             for _ in range(cycle_len(slow)):
                 cycle_len_advanced_iter = cycle_len_advanced_iter.next
-            
+            # our other iterator starts at the front while the cyclelenadv iterator has
+            # advanced by the cycle length, so it's 1 cycle loop ahead
             it = head
             # Both iterators advance in tandem.
             while it is not cycle_len_advanced_iter:
@@ -100,3 +112,29 @@ def has_cycle(head):
                 cycle_len_advanced_iter = cycle_len_advanced_iter.next
             return it
     return None
+
+#print(has_cycle(a).data)
+
+# The following program purports to compute the beginning of the
+# cycle without determining the length of the cycle.
+# Is this program correct?
+
+def has_cycle2(head):
+    fast = slow = head
+    while fast and fast.next and fast.next.next:
+        slow, fast = slow.next, fast.next.next
+        if slow is fast: 
+            slow = head
+            while slow is not fast:
+                slow, fast = slow.next, fast.next
+            return slow
+    return None
+
+# the above program worked for my a b c d e->f->g->e loop.
+#print(has_cycle2(a).data)
+# But! It fails to work if the loop size is bigger than the part
+# that isn't a loop. It works if the whole is a loop, and if the 
+# part that isn't a loop is longer than the part that's a loop for the most part.
+# the reason why it doesn't work is because the pointers end up
+# chasing each other around and cannot catch up if they are
+# the wrong distance apart.
