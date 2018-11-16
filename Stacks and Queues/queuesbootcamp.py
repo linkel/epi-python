@@ -13,7 +13,7 @@ class Queue:
         self._data = collections.deque()
     
     def enqueue(self, x):
-        self._data.append(x):
+        self._data.append(x)
 
     def dequeue(self):
         return self._data.popleft()
