@@ -70,13 +70,45 @@ def replace_and_remove(size, s):
     final_size = write_idx + 1
     while cur_idx >= 0:
         if s[cur_idx] == "a":
-            if s[cur_idx] == "a":
-                s[write_idx - 1:write_idx+1] = "dd"
-                write_idx -= 2
-            else:
-                s[write_idx] = s[cur_idx]
-                write_idx -= 1
-            cur_idx -= 1
+            s[write_idx - 1:write_idx+1] = "dd"
+            write_idx -= 2
+        else:
+            s[write_idx] = s[cur_idx]
+            write_idx -= 1
+        cur_idx -= 1
     return final_size
 
 print(replace_and_remove(4,start))
+
+# Variant: You have array C of characters. 
+# Can be letters/digits/blanks/punctuation.
+# the telex-encoding of this array C is an array T of characters
+# in which punctuation marks are spelled out. 
+# . goes to DOT, , goes to COMMA, ? is QUESTION MARK and
+# ! is EXCLAMATION MARK. 
+# Perform telex-encoding with O(1) space. 
+
+# Okay, this means I have to change the array I get, in place.
+
+test = ["hi",",","how","are","you","?"]
+def telex_encode(anArray):
+    for i in range(len(anArray)):
+        if anArray[i] == ",":
+            anArray[i] = "COMMA"
+        elif anArray[i] == ".":
+            anArray[i] = "DOT"
+        elif anArray[i] == "?":
+            anArray[i] = "QUESTION MARK"
+        elif anArray[i] == "!":
+            anArray[i] = "EXCLAMATION MARK"
+    return anArray
+
+print(telex_encode(test))
+print(test)
+
+# Write a program which merges two sorted arrays of integers, A and B.
+# The final result should be a sorted array of length m+n
+# where n and m are the lengths of A and B, resp.
+# Use O(1) additional storage, assume result stored in A, which has sufficient space.
+# C-style arrays.
+

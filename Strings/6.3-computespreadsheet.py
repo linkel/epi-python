@@ -38,14 +38,14 @@ def ss_decode_col_id(col):
 # into the integer, with A being 1 instead of 0. 
 # 
    
-# time complexity of book solution is O(n)
+# time complexity of book solution is O(n) and it doesn't use additional space like mine.
 
 # Variant: solve same problem with A corresponding to 0.
 
 # modifying my own solution...I'm at a loss as to the book's solution for modification
 def convertA0(spreadsheet_id):
     lookup = {}
-    digit = 1
+    digit = 0
     for letter in string.ascii_uppercase:
         lookup[letter] = digit
         digit += 1
@@ -53,11 +53,27 @@ def convertA0(spreadsheet_id):
     final = 0
     for char in spreadsheet_id[-1::-1]:
         correspond = lookup[char]
-        final += correspond*(26**unit)
+        if correspond != 0:
+            final += correspond*(26**unit)
+        else:
+            final += (26**unit)
         unit += 1
-    return final - 1
+    return final
 
-print(convert("ABA"))
-print(convertA0("ABA"))
+# Implement a function that converts an integer to the spreadsheet column id:
 
-# wait, that only works for single letters
+def convertInt(myInt):
+    lookup = {}
+    digit = 0 # will never have a 26 here from remainder so gotta start from 0
+    for letter in string.ascii_uppercase:
+        lookup[digit] = letter
+        digit += 1
+    div = myInt
+    result = ''
+    while div != 0:
+        rem = (div-1) % 26
+        result = result + lookup[rem]
+        div = (div-rem) // 26        
+    return result
+
+print(convertInt(702))
