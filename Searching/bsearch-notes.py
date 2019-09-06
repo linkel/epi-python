@@ -19,7 +19,7 @@ def bsearch(element, arr):
         # because in a language with potential to overflow (not Python lol)
         # the sum of lower and upper could be way too big
         midpoint = lower + (upper - lower) // 2
-        if arr[midpoint] < t:
+        if arr[midpoint] < element:
             lower = midpoint + 1
         elif arr[midpoint] == element:
             return midpoint
