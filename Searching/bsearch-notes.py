@@ -27,3 +27,16 @@ def bsearch(element, arr):
             upper = midpoint - 1
     return -1
 
+# Python's bisect module provides some bsearch functions for sorted lists.
+# maintains a list in sorted order when inserting. 
+
+# bisect.bisect_left(a,x) returns the index of the first entry
+# that is greater than or equal to the targeted value, where a is an array and x is your target.
+# if all elements in the list are < x, it returns len(a). 
+# so it gives you back the first element that is NOT LESS than the target. 
+
+# bisect.bisect_right(a,x) returns the index of the first entry greater than the target. 
+# it also returns len(a) if all el in the list are <= x. 
+# so this gives you back the first element that is GREATER than the target. 
+
+# Hmm, I'm not sure I know best how to use the above. 
