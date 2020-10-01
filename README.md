@@ -5,4 +5,6 @@ Taking notes as I read through Elements of Programming Interviews in Python by A
 
 I was working through this pretty intensely around Oct - Dec 2018 to prep for my career change into programming. It's a good book! Some of the problems are a little funky since the book was originally written in C++, but the concepts it goes over are really good. 
 
-It's now September 2019 (wow, time flies) and I thought it'd be good for me to come back to this. It's quality stuff. Highly recommend this book!
+I'd say this book was a great experience on how to persevere when feeling very clueless. Going from next to no programming experience to working through linked lists in this book felt very difficult, but I was making progress daily when I sat down to think, diagram, and code. 
+
+It's been more than a year now since my career change and I'm inordinately satisfied with how things have turned out. 
